@@ -156,8 +156,8 @@ def draw_student_card(student_pic_path, student_data):
     labels="""
 ID Number:
 Name:
-Gender:
 AGE:
+Gender:
 Class:
 Phone:
 Email:
@@ -517,11 +517,11 @@ def student_dashboard(student_id):
         #mask.show()
 
         draw_circle=ImageDraw.Draw(im=mask)
-        draw_circle.ellipse(xy=(0, 0, size, size), fill=255, outline=True)
+        draw_circle.ellipse(xy=(0, 0, size, size), fill=255, outline=True)#fill = 255 white color outline true =>perfect circle
 
         ouput=ImageOps.fit(image=student_pic_image_obj, size=mask.size,
                         centering=(1, 1))
-        ouput.putalpha(mask)
+        ouput.putalpha(mask)# transperant blank in gray scale
 
         student_picture=ImageTk.PhotoImage(ouput)
         #ouput.show()
@@ -541,16 +541,16 @@ def student_dashboard(student_id):
 
         student_details=f"""
 Student ID: {student_id}\n
-Name: {get_student_details[0][0]}\n
-Gender: {get_student_details[0][1]}\n
-AGE: {get_student_details[0][2]}\n
-Class: {get_student_details[0][3]}\n
-Phone: {get_student_details[0][4]}\n
-Email: {get_student_details[0][5]}
+Name:       {get_student_details[0][0]}\n
+Gender:     {get_student_details[0][1]}\n
+AGE:        {get_student_details[0][2]}\n
+Class:      {get_student_details[0][3]}\n
+Phone:      {get_student_details[0][4]}\n
+Email:      {get_student_details[0][5]}
 """
         
         student_details_lb=tk.Label(home_page_fm,  text=student_details,
-                                    font=("Bold", 15), justify=tk.LEFT)
+                                    font=("Bold", 13), justify=tk.LEFT)
         student_details_lb.place(x=20, y=130)
 
         home_page_fm.pack(fill=tk.BOTH, expand=True)
@@ -1173,28 +1173,28 @@ def admin_dashboard():
             SELECT id_number, name, class, gender FROM data
             WHERE id_number == '{search_input.get()}'
                 """)
-                print(found_data)
+                #print(found_data)
 
             elif find_by_option_btn.get() == 'name':
                 found_data=fetch_student_data(query=f"""
             SELECT id_number, name, class, gender FROM data
             WHERE name LIKE '%{search_input.get()}%'
                 """)
-                print(found_data)
+                #print(found_data)
 
             elif find_by_option_btn.get() == 'class':
                 found_data=fetch_student_data(query=f"""
             SELECT id_number, name, class, gender FROM data
             WHERE class == '{search_input.get()}'
                 """)
-                print(found_data)
+                #print(found_data)
 
             elif find_by_option_btn.get() == 'gender':
                 found_data=fetch_student_data(query=f"""
             SELECT id_number, name, class, gender FROM data
             WHERE gender == '{search_input.get()}'
                 """)
-                print(found_data)
+                #print(found_data)
 
             if found_data:
 
@@ -1325,7 +1325,7 @@ def admin_dashboard():
             else:    
                 selected_classes.append(name)
 
-            print(selected_classes)
+            #print(selected_classes)
 
         def collect_emails():
 
@@ -1542,7 +1542,7 @@ def add_account_page():
       
         if not check_id_already_exists(id_number=generated_id):
             
-            print("generated id: ", generated_id)
+            #print("generated id: ", generated_id)
             
             student_id.config(state=tk.NORMAL)
             student_id.delete(0, tk.END)
