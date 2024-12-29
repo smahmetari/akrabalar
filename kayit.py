@@ -305,7 +305,7 @@ def sendmail_to_student(email,message,subject):
     smtp_port=587
 
     username=my_email.email_address 
-    password= "" # Go to settings four your Goole Accoun in the app or device => 16 char pass key
+    password= my_email.password #"" # Go to settings four your Goole Accoun in the app or device => 16 char pass key
 
     msg=MIMEMultipart()
 
@@ -315,7 +315,7 @@ def sendmail_to_student(email,message,subject):
 
     msg.attach(MIMEText(_text=message, _subtype='html')) 
 
-    smtp_connection=smtplib.SMTP(host=smtp_server,port=smtp_port)
+    smtp_connection=smtplib.SMTP(host=smtp_server, port=smtp_port)
     smtp_connection.starttls()
     smtp_connection.login(user=username, password=password)
 
@@ -542,8 +542,8 @@ def student_dashboard(student_id):
         student_details=f"""
 Student ID: {student_id}\n
 Name:       {get_student_details[0][0]}\n
-Gender:     {get_student_details[0][1]}\n
-AGE:        {get_student_details[0][2]}\n
+Age:     {get_student_details[0][1]}\n
+Gender:        {get_student_details[0][2]}\n
 Class:      {get_student_details[0][3]}\n
 Phone:      {get_student_details[0][4]}\n
 Email:      {get_student_details[0][5]}
@@ -1791,6 +1791,7 @@ def add_account_page():
 
 init_database() 
 #welcome_page()
-admin_dashboard()
-#admin_login_page()
+#admin_dashboard()
+#(sendmail_to_student(email='smahmetari@gmail.com', message='<h1>Hello...</h1>', subject='Testing')
+admin_login_page()
 root.mainloop()
